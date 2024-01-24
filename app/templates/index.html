@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+  <head>
+    <title>play with sockets</title>
+  </head>
+  <body>
+    <h1>Events</h1>
+    <div id="events_user1"></div>
+    <hr/>
+    <div id="events_user2"></div>
+    <br>
+    <script>
+      const log_user1 = (text, color) => {
+        document.getElementById('events_user1').innerHTML += `<span style="color: ${color}">${text}</span><br>`;
+      };
+      const socket_x_1 = new WebSocket('ws://' + location.host + '/direct_exchange/user1');
+      socket_x_1.addEventListener('message', ev => {
+        log_user1('user1 has event (X): ' + ev.data, 'blue');
+      });
+
+
+    </script>
+  </body>
+</html>
