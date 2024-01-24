@@ -1,3 +1,5 @@
 pika
 flask-sock
 gunicorn
+pydantic[dotenv]==1.10.7
+openai==1.9.0

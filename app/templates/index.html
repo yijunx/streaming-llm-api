@@ -5,17 +5,26 @@
   </head>
   <body>
     <h1>Events</h1>
-    <div id="events_user1"></div>
-    <hr/>
-    <div id="events_user2"></div>
-    <br>
+    <div id="question1">how to play bass</div>
+    <div id="answer1"></div>
+    <hr>
+    <div id="question2">how to play piano</div>
+    <div id="answer2"></div>
+    <hr>
     <script>
-      const log_user1 = (text, color) => {
-        document.getElementById('events_user1').innerHTML += `<span style="color: ${color}">${text}</span><br>`;
+      const log_q1 = (text) => {
+        document.getElementById('answer1').innerHTML += text;
       };
-      const socket_x_1 = new WebSocket('ws://' + location.host + '/direct_exchange/user1');
+      const log_q2 = (text) => {
+        document.getElementById('answer2').innerHTML += text;
+      };
+      const socket_x_1 = new WebSocket('ws://' + location.host + '/direct_exchange/question1');
+      const socket_x_2 = new WebSocket('ws://' + location.host + '/direct_exchange/question2');
       socket_x_1.addEventListener('message', ev => {
-        log_user1('user1 has event (X): ' + ev.data, 'blue');
+        log_q1(ev.data);
+      });
+      socket_x_2.addEventListener('message', ev => {
+        log_q2(ev.data);
       });
 
 
