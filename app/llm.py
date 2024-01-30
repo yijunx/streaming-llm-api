@@ -32,6 +32,7 @@ def answer_question_with_stream(question_id, question):
     # response = client.completions.create(model=deployment_name, prompt=start_phrase, max_tokens=10) #, stream=True)
     collected_chunks = []
     collected_messages = []
+    full_answer = ""
 
     for chunk in response:
         chunk_time = time.time() - start_time  # calculate the time delay of the chunk
@@ -45,6 +46,8 @@ def answer_question_with_stream(question_id, question):
             channel.basic_publish(
                 exchange="direct_logs", routing_key=question_id, body=chunk_message
             )
+            full_answer += chunk_message
+    return full_answer
 
 
 # python app/llm.py question1 "how to play bass"

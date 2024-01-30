@@ -12,12 +12,16 @@ def answer_question():
     question_id = request.json["question_id"]
     question = request.json["question"]
 
-    logger.info(question)
-    logger.info(question_id)
+    print(question)
+    print(question_id)
 
-    answer_question_with_stream(question_id=question_id, question=question)
+    full_answer = answer_question_with_stream(
+        question_id=question_id, question=question
+    )
 
-    return "question answered!", 200
+    print(full_answer)
+    # now save the full answer into db..
+    return "answered", 200
 
 
 if __name__ == "__main__":
