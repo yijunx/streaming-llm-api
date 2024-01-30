@@ -6,7 +6,20 @@ reopen in devcontainer
 Bring it up and running:
 * starting up the flask websocket server with gunicorn `gunicorn -b 0.0.0.0:5000 --workers 4 --threads 100 app.flask_socket:app`, this is a service which establish websocket with backend. and the backend listens to rabbitmq.
 * Starting up the another backend which actually receives the question, `python another_backend.py`.
-* Using your browser to open localhost:5000 to observe the streaming words comming back from flask_socket (which streamed from rabbitmq, which put there by another_backend streamingly)
+* Using your browser to open localhost:5000 (please watch it, the essence of this repo is to show the phrase by phrase response to user...)
+* Using postman or curl to send in the question like below, then the localhost:5000 page should be able to show the answer
+
+
+    ```
+    curl --location 'localhost:5001/questions' \
+    --header 'Content-Type: application/json' \
+    --data '{"question_id": "question1", "question": "how to play bass"}'
+
+    curl --location 'localhost:5001/questions' \
+    --header 'Content-Type: application/json' \
+    --data '{"question_id": "question2", "question": "how to play piano"}'
+    ```
+
 
 How it works
 * In this app folder, there are 2 backends
